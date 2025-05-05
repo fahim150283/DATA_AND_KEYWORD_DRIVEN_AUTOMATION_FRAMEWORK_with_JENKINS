@@ -42,7 +42,7 @@ It supports data-driven testing (Excel-based test data) and keyword-driven testi
 
 # ⚙️ Setup & Execution
 
-### Prerequisites
+Prerequisites
 
 ✅ Java 11+ (or Java 21, as configured in pom.xml)
 
@@ -64,14 +64,14 @@ It supports data-driven testing (Excel-based test data) and keyword-driven testi
 Create a new Jenkins job (Freestyle or Pipeline).
 
 ## Set up Git repo:
-**Repository URL:** https://github.com/fahim150283/AutomationWithJenkins.git
+Repository URL: https://github.com/fahim150283/AutomationWithJenkins.git
 
-**Branch:** master
+Branch: master
 ## Add build step:
 `mvn clean test`
 
 ## Add Post-build Action: 
-Publish Allure Report (allure-results)
+Publish Allure Report (allure-results/)
 
 # 🔧 Key Features
 #### ✔ Data-Driven Testing – Test data stored in Excel sheets.
@@ -94,4 +94,4 @@ If Lombok errors occur, check pom.xml for Java module fixes.
 # 📜 License
 MIT License – Free to use and modify.
 
-# Happy Testing! 🚀
+Happy Testing! 🚀
