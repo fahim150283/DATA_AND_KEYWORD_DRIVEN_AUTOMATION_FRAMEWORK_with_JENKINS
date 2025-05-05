@@ -43,6 +43,9 @@ build/
 
 /.idea/
 /allure-results/
+
+#############################
+
 # Ignore backup files
 *~
 *.swp
