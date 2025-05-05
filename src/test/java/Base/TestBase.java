@@ -8,6 +8,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -19,7 +21,6 @@ import java.util.Properties;
 public class TestBase {
 
     /*
-
     This class will have all the common methods and variables for the followings
      1. webdriver - done
      2. properties - done
@@ -59,6 +60,7 @@ public class TestBase {
                 ChromeOptions options = new ChromeOptions();
                 if (headless) {
                     options.addArguments("--headless");
+                    options.addArguments("--disable-cookies"); // Disable cookies
                     options.addArguments("--disable-gpu"); // Disable GPU for headless mode
                     driver = new ChromeDriver(options);
                 }
@@ -66,6 +68,7 @@ public class TestBase {
                 FirefoxOptions options = new FirefoxOptions();
                 if (headless) {
                     options.addArguments("--headless");
+                    options.addArguments("--disable-cookies"); // Disable cookies
                     options.addArguments("--disable-gpu"); // Disable GPU for headless mode
                     driver = new FirefoxDriver(options);
                 }
@@ -73,6 +76,7 @@ public class TestBase {
                 EdgeOptions options = new EdgeOptions();
                 if (headless) {
                     options.addArguments("--headless");
+                    options.addArguments("--disable-cookies"); // Disable cookies
                     options.addArguments("--disable-gpu"); // Disable GPU for headless mode
                     driver = new EdgeDriver(options);
                 }
@@ -82,6 +86,11 @@ public class TestBase {
         driver.manage().window().setPosition(new Point(-1000, 0));
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(config.getProperty("implicitwait"))));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Long.parseLong(config.getProperty("explicitwait"))));
+        FluentWait<WebDriver> fluentWait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(Long.parseLong(config.getProperty("fluentwait"))))
+                .pollingEvery(Duration.ofSeconds(Long.parseLong(config.getProperty("fluentwait"))))
+                .ignoring(Exception.class);
 
     }
 
