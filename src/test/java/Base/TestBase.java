@@ -1,5 +1,6 @@
 package Base;
 
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,7 +25,7 @@ public class TestBase {
     This class will have all the common methods and variables for the followings
      1. webdriver - done
      2. properties - done
-     3. logs
+     3. logs -
      4. extent report
      5. DB
      6. Email
@@ -37,6 +38,7 @@ public class TestBase {
     public static Properties config = new Properties();
     public static Properties OR = new Properties();
     public static FileInputStream fis;
+    public static Logger logger;
 
     @BeforeSuite
     public void setUp() {
@@ -82,15 +84,21 @@ public class TestBase {
                 }
             }
         }
+
+        //getting url and maximizing
         driver.get(config.getProperty("testsiteurl"));
         driver.manage().window().setPosition(new Point(-1000, 0));
         driver.manage().window().maximize();
+
+
+        //waits
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(config.getProperty("implicitwait"))));
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Long.parseLong(config.getProperty("explicitwait"))));
-        FluentWait<WebDriver> fluentWait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(Long.parseLong(config.getProperty("fluentwait"))))
-                .pollingEvery(Duration.ofSeconds(Long.parseLong(config.getProperty("fluentwait"))))
-                .ignoring(Exception.class);
+        FluentWait<WebDriver> fluentWait =
+                new FluentWait<>(driver)
+                        .withTimeout(Duration.ofSeconds(Long.parseLong(config.getProperty("fluentwait"))))
+                        .pollingEvery(Duration.ofSeconds(Long.parseLong(config.getProperty("fluentwait"))))
+                        .ignoring(Exception.class);
 
     }
 
