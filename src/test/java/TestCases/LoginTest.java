@@ -7,12 +7,14 @@ import org.testng.annotations.Test;
 public class LoginTest extends TestBase {
 
     @Test
-    public void loginTest()  {
-        driver.findElement(By.cssSelector(OR.getProperty("bmlBtn"))).click();
+    public void loginTest() {
+        logger.info("Login test started");
         try {
+            driver.findElement(By.cssSelector(OR.getProperty("bmlBtn"))).click();
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        logger.info("Login test completed");
     }
 }

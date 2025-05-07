@@ -1,0 +1,18 @@
+2025-05-07 12:43:47.885 [main] INFO  org.example - Chrome driver created
+2025-05-07 12:43:48.672 [main] INFO  org.example - Navigated to https://www.way2automation.com/angularjs-protractor/banking/#/login
+2025-05-07 12:43:49.071 [main] INFO  org.example - Window maximized
+2025-05-07 12:43:49.130 [TestNG-tests-1] INFO  org.example - Login test started
+2025-05-07 12:43:54.202 [TestNG-tests-1] INFO  org.example - Login test completed
+2025-05-07 12:43:54.389 [main] INFO  org.example - Driver closed
+2025-05-07 12:46:34.340 [main] INFO  org.example - Chrome driver created
+2025-05-07 12:46:35.002 [main] INFO  org.example - Navigated to https://www.way2automation.com/angularjs-protractor/banking/#/login
+2025-05-07 12:46:35.413 [main] INFO  org.example - Window maximized
+2025-05-07 12:46:35.470 [TestNG-tests-1] INFO  org.example - Login test started
+2025-05-07 12:46:40.549 [TestNG-tests-1] INFO  org.example - Login test completed
+2025-05-07 12:46:40.707 [main] INFO  org.example - Driver closed
+2025-05-07 16:09:44.914 [main] INFO  org.example - Chrome driver created
+2025-05-07 16:09:45.764 [main] INFO  org.example - Navigated to https://www.way2automation.com/angularjs-protractor/banking/#/login
+2025-05-07 16:09:46.161 [main] INFO  org.example - Window maximized
+2025-05-07 16:09:46.223 [TestNG-tests-1] INFO  org.example - Login test started
+2025-05-07 16:09:51.294 [TestNG-tests-1] INFO  org.example - Login test completed
+2025-05-07 16:09:51.481 [main] INFO  org.example - Driver closed

@@ -1,10 +1,13 @@
 package Rough;
 
+import Base.TestBase;
+import org.testng.annotations.Test;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class TestProperties {
+public class TestProperties extends TestBase {
     public static void main(String[] args) throws IOException {
 
         Properties config = new Properties();
@@ -16,5 +19,13 @@ public class TestProperties {
 
         System.out.println(config.getProperty("browser"));
         System.out.println(OR.getProperty("bmlBtn"));
+    }
+
+    @Test
+    public void test(){
+        logger.debug("Login test started");
+        logger.debug("Login test completed");
+        logger.info("Login test started");
+        logger.error("Login test completed");
     }
 }

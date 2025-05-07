@@ -1,5 +1,6 @@
 package Base;
 
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -38,7 +39,7 @@ public class TestBase {
     public static Properties config = new Properties();
     public static Properties OR = new Properties();
     public static FileInputStream fis;
-    public static Logger logger;
+    public static Logger logger = LogManager.getLogger("org.example");
 
     @BeforeSuite
     public void setUp() {
@@ -65,7 +66,10 @@ public class TestBase {
                     options.addArguments("--disable-cookies"); // Disable cookies
                     options.addArguments("--disable-gpu"); // Disable GPU for headless mode
                     driver = new ChromeDriver(options);
+                } else {
+                    driver = new ChromeDriver();
                 }
+                logger.info("Chrome driver created");
             } else if (config.getProperty("browser").equals("firefox")) {
                 FirefoxOptions options = new FirefoxOptions();
                 if (headless) {
@@ -73,7 +77,10 @@ public class TestBase {
                     options.addArguments("--disable-cookies"); // Disable cookies
                     options.addArguments("--disable-gpu"); // Disable GPU for headless mode
                     driver = new FirefoxDriver(options);
+                } else {
+                    driver = new FirefoxDriver();
                 }
+                logger.info("Firefox driver created");
             } else if (config.getProperty("browser").equals("edge")) {
                 EdgeOptions options = new EdgeOptions();
                 if (headless) {
@@ -81,14 +88,19 @@ public class TestBase {
                     options.addArguments("--disable-cookies"); // Disable cookies
                     options.addArguments("--disable-gpu"); // Disable GPU for headless mode
                     driver = new EdgeDriver(options);
+                } else {
+                    driver = new EdgeDriver();
                 }
+                logger.info("Edge driver created");
             }
         }
 
         //getting url and maximizing
         driver.get(config.getProperty("testsiteurl"));
+        logger.info("Navigated to " + config.getProperty("testsiteurl"));
         driver.manage().window().setPosition(new Point(-1000, 0));
         driver.manage().window().maximize();
+        logger.info("Window maximized");
 
 
         //waits
@@ -107,5 +119,6 @@ public class TestBase {
         if (driver != null) {
             driver.quit();
         }
+        logger.info("Driver closed");
     }
 }
