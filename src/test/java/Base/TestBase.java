@@ -17,6 +17,9 @@ import org.testng.annotations.BeforeSuite;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.Properties;
 
@@ -43,6 +46,15 @@ public class TestBase {
 
     @BeforeSuite
     public void setUp() {
+        // Clear previous logs
+        try {
+            Files.deleteIfExists(Paths.get(System.getProperty("user.dir") + "/src/test/resources/Logs/Application.log"));
+            Files.deleteIfExists(Paths.get(System.getProperty("user.dir") + "/src/test/resources/Logs/Selenium.log"));
+        } catch (IOException e) {
+            logger.error("Could not delete old log files", e);
+        }
+
+
         if (driver == null) {
             try {
                 fis = new FileInputStream(System.getProperty("user.dir") + "/src/test/resources/Properties/config.properties");
@@ -111,7 +123,6 @@ public class TestBase {
                         .withTimeout(Duration.ofSeconds(Long.parseLong(config.getProperty("fluentwait"))))
                         .pollingEvery(Duration.ofSeconds(Long.parseLong(config.getProperty("fluentwait"))))
                         .ignoring(Exception.class);
-
     }
 
     @AfterSuite
