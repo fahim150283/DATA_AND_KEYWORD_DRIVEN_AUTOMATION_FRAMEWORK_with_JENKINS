@@ -22,10 +22,8 @@ public class LoginTest extends TestBase {
     @Test
     public void loginTest2() {
         logger.info("Login test started");
-        System.out.println("jhakanaka deho dolana");
+        driver.findElement(By.cssSelector(OR.getProperty("bmlBtn"))).click();
+        Assert.assertTrue(isElementPresent(By.cssSelector(OR.getProperty("addCustBtn"))));
         logger.info("Login test completed");
-        logger.debug("Login test failed");
-        logger.error("Login test failed");
-        Assert.fail("Login test failed");
     }
 }
