@@ -7,9 +7,9 @@
     </listeners>
 
     <test name="ChromeTest">
-        <parameter name="headless" value="false"/>
         <classes>
-            <class name="TestCases.LoginTest"/>
+            <class name="TestCases.BankManagerLoginTest"/>
+            <class name="TestCases.AddCustomerTest"/>
         </classes>
     </test>
 
