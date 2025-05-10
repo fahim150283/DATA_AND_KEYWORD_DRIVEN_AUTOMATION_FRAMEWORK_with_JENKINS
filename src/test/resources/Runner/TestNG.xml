@@ -4,7 +4,6 @@
 
     <listeners>
         <!--        <listener class-name="Listeners."/>-->
-        <!--        <listener class-name="Utilities.RetryListner"/>-->
     </listeners>
 
     <test name="ChromeTest">
