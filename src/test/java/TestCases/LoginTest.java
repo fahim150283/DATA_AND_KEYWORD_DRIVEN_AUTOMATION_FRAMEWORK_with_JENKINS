@@ -12,7 +12,7 @@ public class LoginTest extends TestBase {
         logger.info("Login test started");
         try {
             driver.findElement(By.cssSelector(OR.getProperty("bmlBtn"))).click();
-            Thread.sleep(5000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -21,9 +21,8 @@ public class LoginTest extends TestBase {
 
     @Test
     public void loginTest2() {
-        logger.info("Login test started");
-        driver.findElement(By.cssSelector(OR.getProperty("bmlBtn"))).click();
-        Assert.assertTrue(isElementPresent(By.cssSelector(OR.getProperty("addCustBtn"))));
-        logger.info("Login test completed");
+        logger.info("checking add customer button");
+        Assert.assertTrue(isElementPresent(By.cssSelector(OR.getProperty("addCustBtn"))), "Add customer button is not present");
+        logger.info("checking add customer button completed");
     }
 }
