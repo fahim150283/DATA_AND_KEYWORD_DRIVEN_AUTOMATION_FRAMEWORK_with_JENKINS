@@ -1,5 +1,6 @@
 package Base;
 
+import Utilities.ExcelReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -44,6 +45,15 @@ public class TestBase {
     public static Properties OR = new Properties();
     public static FileInputStream fis;
     public static Logger logger = LogManager.getLogger("org.example");
+
+    public static ExcelReader excel;
+    static {
+        try {
+            excel = new ExcelReader(System.getProperty("user.dir") + "/src/test/resources/Excel/CustomerData.xlsx");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @BeforeSuite
     public void setUp() {
@@ -127,7 +137,8 @@ public class TestBase {
     }
 
     @AfterSuite
-    public void tearDown() {
+    public void tearDown() throws InterruptedException {
+        Thread.sleep(15000);
         if (driver != null) {
             driver.quit();
         }
