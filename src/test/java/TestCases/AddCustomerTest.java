@@ -36,16 +36,14 @@ public class AddCustomerTest extends TestBase {
 
     @DataProvider(name = "CustomerData")
     public Object[][] getCustomerData() {
+        String sheetname = "CustomerData";
+        int rows = excel.getRowCount(sheetname);
+        int cols = excel.getColumnCount(sheetname);
+        Object[][] data = new Object[rows - 1][cols];
 
-        String sheetName = "CustomerData";
-        int rows = excel.getRowCount("CustomerData");
-        int columns = excel.getColumnCount("CustomerData");
-        Object[][] data = new Object[rows - 1][columns];
-
-        for (int rowNum = 1; rowNum < rows; rowNum++) {
-            for (int colNum = 0; colNum < columns; colNum++) {
-                data[rowNum - 1][colNum] = excel.getCellData(sheetName, colNum, rowNum);
-                System.out.println(data[rowNum - 1][colNum]);
+        for (int row = 1; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                data[row - 1][col] = excel.getCellData(sheetname, row, col);
             }
         }
         return data;

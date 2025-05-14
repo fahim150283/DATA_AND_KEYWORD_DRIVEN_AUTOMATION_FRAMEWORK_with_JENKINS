@@ -138,7 +138,7 @@ public class TestBase {
 
     @AfterSuite
     public void tearDown() throws InterruptedException {
-        Thread.sleep(15000);
+//        Thread.sleep(15000);
         if (driver != null) {
             driver.quit();
         }
