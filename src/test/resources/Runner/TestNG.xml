@@ -3,10 +3,11 @@
 <suite name="Data Driven Basics" parallel="tests">
 
     <listeners>
-        <!--        <listener class-name="Listeners."/>-->
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.testng.reporters.JUnitXMLReporter"/>
     </listeners>
 
-    <test name="ChromeTest">
+    <test name="Manager Login test">
         <classes>
             <class name="TestCases.BankManagerLoginTest"/>
             <class name="TestCases.AddCustomerTest"/>

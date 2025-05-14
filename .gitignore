@@ -51,3 +51,4 @@ build/
 *.swp
 *.swo
 /src/test/resources/Logs/
+/test-output/

@@ -3,6 +3,7 @@ package TestCases;
 import Base.TestBase;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.Test;
 
 public class BankManagerLoginTest extends TestBase {
@@ -17,6 +18,7 @@ public class BankManagerLoginTest extends TestBase {
             throw new RuntimeException(e);
         }
         logger.info("Login test completed");
+        Reporter.log("Login test successfully completed");
     }
 
     @Test
