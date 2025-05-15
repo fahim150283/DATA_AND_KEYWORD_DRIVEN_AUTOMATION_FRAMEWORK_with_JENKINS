@@ -17,12 +17,10 @@ public class BankManagerLoginTest extends TestBase {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        logger.info("Login test completed");
-        Reporter.log("Login test successfully completed");
     }
 
     @Test
-    public void loginTest2() {
+    public void AssertionTest() {
         logger.info("checking add customer button");
         Assert.assertTrue(isElementPresent(By.cssSelector(OR.getProperty("addCustBtn"))), "Add customer button is not present");
         logger.info("checking add customer button completed");

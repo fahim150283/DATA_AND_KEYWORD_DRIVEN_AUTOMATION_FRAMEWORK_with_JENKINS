@@ -5,9 +5,10 @@
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.testng.reporters.JUnitXMLReporter"/>
+        <listener class-name="Listeners.CustomListeners"/>
     </listeners>
 
-    <test name="Manager Login test">
+    <test name="Login test">
         <classes>
             <class name="TestCases.BankManagerLoginTest"/>
             <class name="TestCases.AddCustomerTest"/>
