@@ -7,6 +7,9 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 
+import static Base.TestBase.*;
+import Utilities.ScreenshotUtil;
+
 public class CustomListeners implements ITestListener {
     public static Logger logger = LogManager.getLogger("org.example");
 
@@ -31,11 +34,12 @@ public class CustomListeners implements ITestListener {
     public void onTestFailure(ITestResult result) {
         ITestListener.super.onTestFailure(result);
 
-        Reporter.log(result.getName() + " - Test is failed.<br>");
-        Reporter.log("Taking screenshot of failed test case.<br>");
-        Reporter.log("<a target=\"_blank\" href=\"Screenshots/Attack-On-Titan-Featured-And-Social-Media-Image.jpg>Click to see screenshot</a>");
-        Reporter.log("<br>");
-        Reporter.log("<a target=\"_blank\" href=\"Screenshots/Attack-On-Titan-Featured-And-Social-Media-Image.jpg>Click to see screenshot</a>");
+        Object testClass = result.getInstance();
+        String screenshotPath = ScreenshotUtil.captureScreenshot(driver, result.getName());
+        logger.error(result.getName() + " - Test Failed. Screenshot captured at: " + screenshotPath);
+
+        Reporter.log("<br><strong>Test Failed:</strong> " + result.getName());
+        Reporter.log("<br><a href='" + screenshotPath + "' target='_blank'>Click here to view screenshot</a><br>");
     }
 
     @Override

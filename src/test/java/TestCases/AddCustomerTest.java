@@ -34,8 +34,8 @@ public class AddCustomerTest extends TestBase {
         driver.switchTo().alert().accept();
     }
 
-    @Test(dataProvider = "CustomerData")
-    public void addCustomerTest1(String firstName, String lastName, String postCode) {
+    @Test
+    public void AssertFail(String firstName, String lastName, String postCode) {
         logger.info("checking add customer functionality");
         Assert.fail();
     }
