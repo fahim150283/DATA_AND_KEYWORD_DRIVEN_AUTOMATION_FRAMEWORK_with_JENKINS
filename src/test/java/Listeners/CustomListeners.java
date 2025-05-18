@@ -41,11 +41,7 @@ public class CustomListeners implements ITestListener {
         logger.error(result.getName() + " - Test Failed. Screenshot captured at: " + screenshotPath);
 
         Reporter.log("<br>");
-        Reporter.log("<strong>" + result.getName() + " - Test Failed:</strong> ");
-        Reporter.log("<br>");
-        Reporter.log("<a href='file://" + screenshotPath + "'>View Screenshot</a><br>");
-        Reporter.log("<br>");
-        Reporter.log("<a href='https://www.google.com'>Google</a><br>");
+        Reporter.log("<strong>" + result.getName() + " - Test Failed:</strong> <a href='file://" + screenshotPath + "'> View Screenshot</a><br>");
         Reporter.log("<br>");
     }
 
