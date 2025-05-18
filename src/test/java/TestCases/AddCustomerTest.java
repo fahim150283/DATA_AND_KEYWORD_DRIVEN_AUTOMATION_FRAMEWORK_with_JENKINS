@@ -34,12 +34,6 @@ public class AddCustomerTest extends TestBase {
         driver.switchTo().alert().accept();
     }
 
-    @Test
-    public void AssertFail(String firstName, String lastName, String postCode) {
-        logger.info("checking add customer functionality");
-        Assert.fail();
-    }
-
     @DataProvider(name = "CustomerData")
     public Object[][] getCustomerData() {
         String sheetname = "CustomerData";

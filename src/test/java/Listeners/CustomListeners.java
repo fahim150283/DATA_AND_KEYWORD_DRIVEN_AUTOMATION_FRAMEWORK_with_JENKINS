@@ -1,5 +1,6 @@
 package Listeners;
 
+import Utilities.ScreenshotUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
@@ -7,8 +8,7 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 
-import static Base.TestBase.*;
-import Utilities.ScreenshotUtil;
+import static Base.TestBase.driver;
 
 public class CustomListeners implements ITestListener {
     public static Logger logger = LogManager.getLogger("org.example");
@@ -33,13 +33,20 @@ public class CustomListeners implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         ITestListener.super.onTestFailure(result);
+        System.setProperty("org.uncommons.reportng.escape-output", "false");
 
-        Object testClass = result.getInstance();
+        result.getInstance();
         String screenshotPath = ScreenshotUtil.captureScreenshot(driver, result.getName());
+//        String screenshotPath = "https://www.google.com";
         logger.error(result.getName() + " - Test Failed. Screenshot captured at: " + screenshotPath);
 
-        Reporter.log("<br><strong>Test Failed:</strong> " + result.getName());
-        Reporter.log("<br><a href='" + screenshotPath + "' target='_blank'>Click here to view screenshot</a><br>");
+        Reporter.log("<br>");
+        Reporter.log("<strong>" + result.getName() + " - Test Failed:</strong> ");
+        Reporter.log("<br>");
+        Reporter.log("<a href='file://" + screenshotPath + "'>View Screenshot</a><br>");
+        Reporter.log("<br>");
+        Reporter.log("<a href='https://www.google.com'>Google</a><br>");
+        Reporter.log("<br>");
     }
 
     @Override
