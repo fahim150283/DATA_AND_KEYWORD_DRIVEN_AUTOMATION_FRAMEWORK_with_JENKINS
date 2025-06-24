@@ -1,6 +1,9 @@
 package Listeners;
 
+import Base.TestBase;
 import Utilities.ScreenshotUtil;
+import com.mysql.cj.util.TestUtils;
+import com.relevantcodes.extentreports.LogStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
@@ -10,7 +13,7 @@ import org.testng.Reporter;
 
 import static Base.TestBase.driver;
 
-public class CustomListeners implements ITestListener {
+public class CustomListeners extends TestBase implements ITestListener {
     public static Logger logger = LogManager.getLogger("org.example");
 
     @Override
@@ -28,6 +31,9 @@ public class CustomListeners implements ITestListener {
         ITestListener.super.onTestSuccess(result);
         logger.info("Login test completed");
         Reporter.log(result.getName() + " - Test is passed");
+        test.log(LogStatus.PASS, result.getName().toUpperCase() + " - Test is passed");
+        rep.endTest(test);
+        rep.flush();
     }
 
     @Override
@@ -43,6 +49,11 @@ public class CustomListeners implements ITestListener {
         Reporter.log("<br>");
         Reporter.log("<strong>" + result.getName() + " - Test Failed:</strong> <a href='file://" + screenshotPath + "'> View Screenshot</a><br>");
         Reporter.log("<br>");
+
+        test.log(LogStatus.FAIL, result.getName().toUpperCase() + " - Test is failed. Screenshot captured at: " + screenshotPath + " - With the exception: " + result.getThrowable());
+        test.log(LogStatus.FAIL, test.addScreenCapture(TestUtils.screenshotName));
+        rep.endTest(test);
+        rep.flush();
     }
 
     @Override
