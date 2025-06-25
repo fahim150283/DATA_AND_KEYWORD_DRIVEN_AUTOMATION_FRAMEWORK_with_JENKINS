@@ -48,7 +48,7 @@ public class TestBase {
     public static Properties OR = new Properties();
     public static FileInputStream fis;
     public static Logger logger = LogManager.getLogger("org.example");
-    public ExtentReports rep = ExtentManager.getInstance();
+    public static ExtentReports rep = ExtentManager.getInstance();
     public static ExtentTest test;
 
     public static ExcelReader excel;
