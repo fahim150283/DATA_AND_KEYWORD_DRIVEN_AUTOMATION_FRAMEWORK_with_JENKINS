@@ -42,8 +42,9 @@ public class CustomListeners extends TestBase implements ITestListener {
         System.setProperty("org.uncommons.reportng.escape-output", "false");
 
         result.getInstance();
-        String screenshotPath = ScreenshotUtil.captureScreenshot(driver, result.getName());
-//        String screenshotPath = "https://www.google.com";
+        String screenshotName = result.getName().toUpperCase()+".png";
+        String screenshotPath = ScreenshotUtil.captureScreenshot(driver, screenshotName);
+        
         logger.error(result.getName() + " - Test Failed. Screenshot captured at: " + screenshotPath);
 
         Reporter.log("<br>");
@@ -51,7 +52,7 @@ public class CustomListeners extends TestBase implements ITestListener {
         Reporter.log("<br>");
 
         test.log(LogStatus.FAIL, result.getName().toUpperCase() + " - Test is failed. Screenshot captured at: " + screenshotPath + " - With the exception: " + result.getThrowable());
-        test.log(LogStatus.FAIL, test.addScreenCapture(TestUtils.screenshotName));
+        test.log(LogStatus.FAIL, test.addScreenCapture(screenshotName));
         rep.endTest(test);
         rep.flush();
     }
