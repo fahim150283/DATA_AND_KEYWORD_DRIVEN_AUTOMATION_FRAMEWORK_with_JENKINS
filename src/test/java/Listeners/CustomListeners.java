@@ -1,6 +1,5 @@
 package Listeners;
 
-import Base.TestBase;
 import Utilities.ScreenshotUtil;
 import com.relevantcodes.extentreports.LogStatus;
 import org.apache.logging.log4j.LogManager;
@@ -21,8 +20,16 @@ public class CustomListeners implements ITestListener {
     }
 
     @Override
+    public void onTestStart(ITestResult result) {
+        ITestListener.super.onTestStart(result);
+        test = rep.startTest(result.getName().toUpperCase());
+    }
+
+    @Override
     public void onFinish(ITestContext context) {
         ITestListener.super.onFinish(context);
+        rep.endTest(test);
+        rep.flush();
     }
 
     @Override
@@ -31,8 +38,6 @@ public class CustomListeners implements ITestListener {
         logger.info("Login test completed");
         Reporter.log(result.getName() + " - Test is passed");
         test.log(LogStatus.PASS, result.getName().toUpperCase() + " - Test is passed");
-        rep.endTest(test);
-        rep.flush();
     }
 
     @Override
@@ -51,9 +56,7 @@ public class CustomListeners implements ITestListener {
         Reporter.log("<br>");
 
         test.log(LogStatus.FAIL, result.getName().toUpperCase() + " - Test is failed. Screenshot captured at: " + screenshotPath + " - With the exception: " + result.getThrowable());
-        test.log(LogStatus.FAIL, test.addScreenCapture(screenshotName));
-        rep.endTest(test);
-        rep.flush();
+        test.log(LogStatus.FAIL, "View Screenshot: " + test.addScreenCapture(screenshotName));
     }
 
     @Override
@@ -69,11 +72,5 @@ public class CustomListeners implements ITestListener {
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
         ITestListener.super.onTestFailedButWithinSuccessPercentage(result);
-    }
-
-    @Override
-    public void onTestStart(ITestResult result) {
-        ITestListener.super.onTestStart(result);
-        test = rep.startTest(result.getName().toUpperCase());
     }
 }

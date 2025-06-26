@@ -11,7 +11,7 @@ public class ExtentManager {
     public static ExtentReports getInstance() {
         if (extent == null) {
             // Report output path
-            String reportPath = System.getProperty("user.dir") + "/test-output/ExtentReport.html";
+            String reportPath = System.getProperty("user.dir") + "/target/surefire-reports/html/ExtentReport.html";
 
             extent = new ExtentReports(reportPath, true);
 

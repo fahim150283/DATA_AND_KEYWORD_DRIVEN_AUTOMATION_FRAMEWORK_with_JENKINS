@@ -12,7 +12,7 @@ public class ScreenshotUtil {
     public static String captureScreenshot(WebDriver driver, String screenshotName) {
         try {
             File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            String path = System.getProperty("user.dir") + "/target/surefire-reports/html/Screenshots/" + screenshotName;
+            String path = System.getProperty("user.dir") + "/target/surefire-reports/html/" + screenshotName;
             File dest = new File(path);
             FileUtils.copyFile(src, dest);
             Reporter.log("Screenshot captured at: " + path);
