@@ -4,6 +4,7 @@ import Utilities.ExcelReader;
 import Utilities.ExtentManager;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -19,10 +20,12 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.DataProvider;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Duration;
@@ -52,9 +55,10 @@ public class TestBase {
     public static ExtentTest test;
 
     public static ExcelReader excel;
+
     static {
         try {
-            excel = new ExcelReader(System.getProperty("user.dir") + "/src/test/resources/Excel/CustomerData.xlsx");
+            excel = new ExcelReader(System.getProperty("user.dir") + "/src/test/resources/Excel/Data.xlsx");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -64,8 +68,7 @@ public class TestBase {
     public void setUp() {
         // Clear previous logs
         try {
-            Files.deleteIfExists(Paths.get(System.getProperty("user.dir") + "/src/test/resources/Logs/Application.log"));
-            Files.deleteIfExists(Paths.get(System.getProperty("user.dir") + "/src/test/resources/Logs/Selenium.log"));
+            Files.deleteIfExists(Paths.get(System.getProperty("user.dir") + "/src/test/resources/Logs"));
         } catch (IOException e) {
             logger.error("Could not delete old log files", e);
         }
@@ -160,12 +163,41 @@ public class TestBase {
     }
 
     public void Click(String locator) {
-        driver.findElement(By.cssSelector(OR.getProperty(locator))).click();
-        logger.info(locator + " - is clicked");
+        if (locator.endsWith("_css")) {
+            driver.findElement(By.cssSelector(OR.getProperty(locator))).click();
+        } else if (locator.endsWith("_xpath")) {
+            driver.findElement(By.xpath(OR.getProperty(locator))).click();
+        } else if (locator.endsWith("_id")) {
+            driver.findElement(By.id(OR.getProperty(locator))).click();
+        }
+        test.log(LogStatus.INFO, ("The locator '" + locator + "' is clicked"));
     }
 
     public void Type(String locator, String value) {
-        driver.findElement(By.cssSelector(OR.getProperty(locator))).sendKeys(value);
-        logger.info("In the locator - " + locator + " - the value - " + value + " - is entered");
+        if (locator.endsWith("_css")) {
+            driver.findElement(By.cssSelector(OR.getProperty(locator))).sendKeys(value);
+        } else if (locator.endsWith("_xpath")) {
+            driver.findElement(By.xpath(OR.getProperty(locator))).sendKeys(value);
+        } else if (locator.endsWith("_id")) {
+            driver.findElement(By.id(OR.getProperty(locator))).sendKeys(value);
+        }
+        test.log(LogStatus.INFO, ("In the locator '" + locator + "' the value '" + value + "' is entered"));
+    }
+
+
+
+    @DataProvider(name = "dp")
+    public Object[][] getData(Method m) {
+        String sheetname = m.getName();
+        int rows = excel.getRowCount(sheetname);
+        int cols = excel.getColumnCount(sheetname);
+        Object[][] data = new Object[rows - 1][cols];
+
+        for (int row = 1; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                data[row - 1][col] = excel.getCellData(sheetname, row, col);
+            }
+        }
+        return data;
     }
 }

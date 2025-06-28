@@ -1,51 +1,36 @@
 package TestCases;
 
 import Base.TestBase;
-import org.openqa.selenium.By;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class AddCustomerTest extends TestBase {
 
-    @Test(dataProvider = "CustomerData")
+    @Test(dataProviderClass = TestBase.class, dataProvider = "dp")
     public void addCustomerTest(String firstName, String lastName, String postCode) {
         logger.info("checking add customer functionality");
 
         // click on add customer button
-        Click("addCustBtn");
+        Click("addCustBtn_css");
         logger.info("click on add customer button completed");
 
         // enter first name
-        Type("firstName", firstName);
+        Type("firstName_css", firstName);
         logger.info("enter first name completed");
 
         // enter last name
-        Type("lastName", lastName);
+        Type("lastName_xpath", lastName);
         logger.info("enter last name completed");
 
         // enter post code
-        Type("postCode", postCode);
+        Type("postCode_css", postCode);
         logger.info("enter post code completed");
 
         // click on add customer submit button
-        Click("addCustSubmit");
+        Click("addCustSubmit_css");
         logger.info("click on add customer button completed");
         driver.switchTo().alert().accept();
     }
 
-    @DataProvider(name = "CustomerData")
-    public Object[][] getCustomerData() {
-        String sheetname = "CustomerData";
-        int rows = excel.getRowCount(sheetname);
-        int cols = excel.getColumnCount(sheetname);
-        Object[][] data = new Object[rows - 1][cols];
 
-        for (int row = 1; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                data[row - 1][col] = excel.getCellData(sheetname, row, col);
-            }
-        }
-        return data;
-    }
 }

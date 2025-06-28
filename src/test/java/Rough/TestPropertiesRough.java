@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Hashtable;
 import java.util.Properties;
 
 public class TestPropertiesRough {
@@ -15,7 +14,7 @@ public class TestPropertiesRough {
 
     static {
         try {
-            excel = new ExcelReader(System.getProperty("user.dir") + "/src/test/resources/Excel/CustomerData.xlsx");
+            excel = new ExcelReader(System.getProperty("user.dir") + "/src/test/resources/Excel/Data.xlsx");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -31,7 +30,7 @@ public class TestPropertiesRough {
         OR.load(fis);
 
         System.out.println(config.getProperty("browser"));
-        System.out.println(OR.getProperty("bmlBtn"));
+        System.out.println(OR.getProperty("bmlBtn_css"));
     }
 
     @Test(dataProvider = "CustomerData1")
