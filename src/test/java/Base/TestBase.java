@@ -158,4 +158,14 @@ public class TestBase {
             return false;
         }
     }
+
+    public void Click(String locator) {
+        driver.findElement(By.cssSelector(OR.getProperty(locator))).click();
+        logger.info(locator + " - is clicked");
+    }
+
+    public void Type(String locator, String value) {
+        driver.findElement(By.cssSelector(OR.getProperty(locator))).sendKeys(value);
+        logger.info("In the locator - " + locator + " - the value - " + value + " - is entered");
+    }
 }

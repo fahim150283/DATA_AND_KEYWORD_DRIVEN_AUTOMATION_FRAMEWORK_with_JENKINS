@@ -13,23 +13,23 @@ public class AddCustomerTest extends TestBase {
         logger.info("checking add customer functionality");
 
         // click on add customer button
-        driver.findElement(By.cssSelector(OR.getProperty("addCustBtn"))).click();
+        Click("addCustBtn");
         logger.info("click on add customer button completed");
 
         // enter first name
-        driver.findElement(By.cssSelector(OR.getProperty("firstName"))).sendKeys(firstName);
+        Type("firstName", firstName);
         logger.info("enter first name completed");
 
         // enter last name
-        driver.findElement(By.cssSelector(OR.getProperty("lastName"))).sendKeys(lastName);
+        Type("lastName", lastName);
         logger.info("enter last name completed");
 
         // enter post code
-        driver.findElement(By.cssSelector(OR.getProperty("postCode"))).sendKeys(postCode);
+        Type("postCode", postCode);
         logger.info("enter post code completed");
 
         // click on add customer submit button
-        driver.findElement(By.cssSelector(OR.getProperty("addCustSubmit"))).click();
+        Click("addCustSubmit");
         logger.info("click on add customer button completed");
         driver.switchTo().alert().accept();
     }

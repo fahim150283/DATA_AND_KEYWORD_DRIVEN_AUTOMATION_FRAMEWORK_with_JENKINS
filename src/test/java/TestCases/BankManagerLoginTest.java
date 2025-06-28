@@ -22,7 +22,6 @@ public class BankManagerLoginTest extends TestBase {
     @Test(priority = 2)
     public void AssertionTest() {
         logger.info("checking add customer button");
-//        Assert.assertTrue(isElementPresent(By.cssSelector(OR.getProperty("addCustBtn"))), "Add customer button is not present");
         Assert.assertTrue(isElementPresent(By.cssSelector("buttonm")), "Add customer button is not present");
         logger.info("checking add customer button completed");
     }
