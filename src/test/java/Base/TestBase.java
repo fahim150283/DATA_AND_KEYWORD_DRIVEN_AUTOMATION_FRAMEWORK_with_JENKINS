@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -17,6 +18,8 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.UnexpectedTagNameException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -29,6 +32,7 @@ import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Duration;
+import java.util.List;
 import java.util.Properties;
 
 public class TestBase {
@@ -182,6 +186,46 @@ public class TestBase {
             driver.findElement(By.id(OR.getProperty(locator))).sendKeys(value);
         }
         test.log(LogStatus.INFO, ("In the locator '" + locator + "' the value '" + value + "' is entered"));
+    }
+
+    public void SelectByVisibleText(String locator, String value) {
+        WebElement dropdownElement = null;
+
+        if (locator.endsWith("_css")) {
+            dropdownElement = driver.findElement(By.cssSelector(OR.getProperty(locator)));
+        } else if (locator.endsWith("_xpath")) {
+            dropdownElement = driver.findElement(By.xpath(OR.getProperty(locator)));
+        } else if (locator.endsWith("_id")) {
+            dropdownElement = driver.findElement(By.id(OR.getProperty(locator)));
+        }
+
+        try {
+            // Try as standard <select>
+            Select select = new Select(dropdownElement);
+            select.selectByVisibleText(value);
+            test.log(LogStatus.INFO, "Selected '" + value + "' from dropdown with locator: " + locator);
+        } catch (UnexpectedTagNameException e) {
+            // Handle custom dropdowns (div/li-based)
+            dropdownElement.click(); // open the dropdown
+
+            // Adjust below XPath based on your actual options structure
+            String optionsXpath = "//li[normalize-space()='" + value + "']";
+            List<WebElement> options = driver.findElements(By.xpath(optionsXpath));
+
+            boolean found = false;
+            for (WebElement option : options) {
+                if (option.getText().equals(value)) {
+                    option.click();
+                    test.log(LogStatus.INFO, "Clicked custom dropdown option '" + value + "' for locator: " + locator);
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                test.log(LogStatus.FAIL, "Option '" + value + "' not found in custom dropdown for locator: " + locator);
+            }
+        }
     }
 
 

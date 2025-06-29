@@ -1,6 +1,7 @@
 package TestCases;
 
 import Base.TestBase;
+import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -8,6 +9,8 @@ public class AddCustomerTest extends TestBase {
 
     @Test(dataProviderClass = TestBase.class, dataProvider = "dp")
     public void addCustomerTest(String firstName, String lastName, String postCode) {
+
+        test.log(LogStatus.INFO, "Provided Data: " + firstName + " " + lastName + " and " + postCode);
         logger.info("checking add customer functionality");
 
         // click on add customer button
