@@ -70,13 +70,6 @@ public class TestBase {
 
     @BeforeSuite
     public void setUp() {
-        // Clear previous logs
-        try {
-            Files.deleteIfExists(Paths.get(System.getProperty("user.dir") + "/src/test/resources/Logs"));
-        } catch (IOException e) {
-            logger.error("Could not delete old log files", e);
-        }
-
 
         if (driver == null) {
             try {

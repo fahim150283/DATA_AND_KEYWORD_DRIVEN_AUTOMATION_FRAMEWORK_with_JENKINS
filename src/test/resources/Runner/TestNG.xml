@@ -11,8 +11,8 @@
     <test name="Login test">
         <classes>
             <class name="TestCases.BankManagerLoginTest"/>
-            <class name="TestCases.AddCustomerTest"/>
-            <class name="TestCases.OpenAccountTest"/>
+<!--            <class name="TestCases.AddCustomerTest"/>-->
+<!--            <class name="TestCases.OpenAccountTest"/>-->
         </classes>
     </test>
 

@@ -1,11 +1,9 @@
-package utilities;
+package Utilities;
 
 import Utilities.ScreenshotUtil;
 import com.relevantcodes.extentreports.LogStatus;
-import org.testng.asserts.SoftAssert;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,28 +22,32 @@ public class CustomSoftAssert {
     }
 
     public void assertTrue(boolean condition, String message) {
-        try {
-            softAssert.assertTrue(condition, message);
-            test.log(LogStatus.PASS, message);
-        } catch (AssertionError e) {
+        if (!condition) {
             String screenshotPath = ScreenshotUtil.captureScreenshot(driver, message + ".png");
             test.log(LogStatus.FAIL, message + test.addScreenCapture(screenshotPath));
             failureScreenshots.add(screenshotPath);
+        } else {
+            test.log(LogStatus.PASS, message);
         }
+        softAssert.assertTrue(condition, message);
     }
 
     public void assertEquals(Object actual, Object expected, String message) {
-        try {
-            softAssert.assertEquals(actual, expected, message);
-            test.log(LogStatus.PASS, message);
-        } catch (AssertionError e) {
+        if (!actual.equals(expected)) {
             String screenshotPath = ScreenshotUtil.captureScreenshot(driver, message + ".png");
             test.log(LogStatus.FAIL, message + " | Expected: " + expected + " but got: " + actual + test.addScreenCapture(screenshotPath));
             failureScreenshots.add(screenshotPath);
+        } else {
+            test.log(LogStatus.PASS, message);
         }
+        softAssert.assertEquals(actual, expected, message);
     }
 
     public void assertAll() {
         softAssert.assertAll();
+    }
+
+    public List<String> getFailureScreenshots() {
+        return failureScreenshots;
     }
 }
