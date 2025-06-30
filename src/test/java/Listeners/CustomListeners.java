@@ -1,13 +1,11 @@
 package Listeners;
 
+import Base.TestBase;
 import Utilities.ScreenshotUtil;
 import com.relevantcodes.extentreports.LogStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
-import org.testng.Reporter;
+import org.testng.*;
 
 import static Base.TestBase.*;
 
@@ -23,6 +21,12 @@ public class CustomListeners implements ITestListener {
     public void onTestStart(ITestResult result) {
         ITestListener.super.onTestStart(result);
         test = rep.startTest(result.getName().toUpperCase());
+
+        if (!TestBase.isTestRunnable(result.getName(), excel)) {
+            String message = "Skipping " + result.getName() + " as runmode is set to NO";
+            test.log(LogStatus.SKIP, message);
+            throw new SkipException(message);
+        }
     }
 
     @Override

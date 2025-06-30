@@ -29,8 +29,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.List;
 import java.util.Properties;
@@ -222,7 +220,6 @@ public class TestBase {
     }
 
 
-
     @DataProvider(name = "dp")
     public Object[][] getData(Method m) {
         String sheetname = m.getName();
@@ -236,5 +233,24 @@ public class TestBase {
             }
         }
         return data;
+    }
+
+
+    public static boolean isTestRunnable(String testName, ExcelReader excel) {
+        String sheetName = "test_suite";
+        int rows = excel.getRowCount(sheetName);
+
+        for (int rNum = 2; rNum <= rows; rNum++) {
+            String testCase = excel.getCellData(sheetName, rNum, 0);
+            System.out.println(testCase+" is the test name");
+            if (testCase.equalsIgnoreCase(testName)) {
+                String runMode = excel.getCellData(sheetName, rNum, 1);
+                System.out.println(runMode+" is the run mode");
+                if (runMode.equalsIgnoreCase("Y")) {
+                    return true;
+                }
+            }
+        }
+     return false;
     }
 }

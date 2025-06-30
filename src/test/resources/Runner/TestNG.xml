@@ -8,11 +8,19 @@
         <listener class-name="Listeners.CustomListeners"/>
     </listeners>
 
+
     <test name="Login test">
         <classes>
             <class name="TestCases.BankManagerLoginTest"/>
-<!--            <class name="TestCases.AddCustomerTest"/>-->
-<!--            <class name="TestCases.OpenAccountTest"/>-->
+            <class name="TestCases.AddCustomerTest"/>
+            <class name="TestCases.OpenAccountTest"/>
+        </classes>
+    </test>
+
+    <test name="Failure Test">
+        <classes>
+            <class name="Rough.FailTest"/>
+            <class name="Rough.TestPropertiesRough"/>
         </classes>
     </test>
 

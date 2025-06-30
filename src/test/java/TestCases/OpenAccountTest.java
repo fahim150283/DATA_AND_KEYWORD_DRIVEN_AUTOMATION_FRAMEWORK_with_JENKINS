@@ -19,15 +19,16 @@ public class OpenAccountTest extends TestBase {
         Click("openAccBtn_xpath");
 
         // now i shall click on customer drop down that matches the name from the data provider
-        Click("custDropDown_css");
+//        Click("custDropDown_css");
 
         // now i shall click on the customer that matches the name from the data provider
         SelectByVisibleText("custSelector_id", customer);
 
         // now i shall click on currency drop down that matches the name from the data provider
-        Click("currencyDropDown_xpath");
+//        Click("currencyDropDown_xpath");
 
         SelectByVisibleText("currencySelector_id", currency);
+
 
         // click on process button
         Click("processBtn_css");
