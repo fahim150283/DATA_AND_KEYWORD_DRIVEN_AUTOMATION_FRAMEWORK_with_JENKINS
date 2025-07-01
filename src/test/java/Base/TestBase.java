@@ -240,6 +240,8 @@ public class TestBase {
         String sheetName = "test_suite";
         int rows = excel.getRowCount(sheetName);
 
+        //need to cjheck what is wrong in excel
+
         for (int rNum = 2; rNum <= rows; rNum++) {
             String testCase = excel.getCellData(sheetName, rNum, 0);
             System.out.println(testCase+" is the test name");
