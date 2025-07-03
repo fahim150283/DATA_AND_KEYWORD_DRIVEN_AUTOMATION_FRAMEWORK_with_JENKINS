@@ -9,7 +9,7 @@
     </listeners>
 
 
-    <test name="Login test">
+    <test name="Login test" preserve-order="true" >
         <classes>
             <class name="TestCases.BankManagerLoginTest"/>
             <class name="TestCases.AddCustomerTest"/>
@@ -17,7 +17,7 @@
         </classes>
     </test>
 
-    <test name="Failure Test">
+    <test name="Failure Test" preserve-order="true">
         <classes>
             <class name="Rough.FailTest"/>
             <class name="Rough.TestPropertiesRough"/>

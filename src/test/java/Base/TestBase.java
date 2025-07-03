@@ -240,15 +240,15 @@ public class TestBase {
         String sheetName = "test_suite";
         int rows = excel.getRowCount(sheetName);
 
-        //need to cjheck what is wrong in excel
+        //need to check what is wrong in excel
 
         for (int rNum = 2; rNum <= rows; rNum++) {
             String testCase = excel.getCellData(sheetName, rNum, 0);
-            System.out.println(testCase+" is the test name");
             if (testCase.equalsIgnoreCase(testName)) {
                 String runMode = excel.getCellData(sheetName, rNum, 1);
-                System.out.println(runMode+" is the run mode");
+                System.out.println("---------> "+runMode+" is the run mode for the test case "+testCase);
                 if (runMode.equalsIgnoreCase("Y")) {
+                    System.out.println("the test case "+testCase+" will be executed");
                     return true;
                 }
             }
