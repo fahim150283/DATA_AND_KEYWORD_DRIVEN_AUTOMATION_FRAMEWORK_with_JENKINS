@@ -20,10 +20,12 @@ public class CustomListeners implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
         ITestListener.super.onTestStart(result);
-        String className = result.getTestClass().getName();
+        String [] classNameparts = result.getTestClass().getName().split("\\.");
+        String className = classNameparts[classNameparts.length-1];
+        System.out.println("Test Class Name: " + className);
         test = rep.startTest(result.getName().toUpperCase());
 
-        if (TestBase.isTestRunnable(className, excel)) {
+        if (!TestBase.isTestRunnable(className, excel)) {
             String message = "Skipping " + result.getName() + " as runmode is set to NO";
             test.log(LogStatus.SKIP, message);
             throw new SkipException(message);
