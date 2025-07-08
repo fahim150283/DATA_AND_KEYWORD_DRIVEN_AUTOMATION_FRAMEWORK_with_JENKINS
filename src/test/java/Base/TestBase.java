@@ -242,7 +242,7 @@ public class TestBase {
 
         //need to check what is wrong in excel
 
-        for (int rNum = 2; rNum <= rows; rNum++) {
+        for (int rNum = 1; rNum <= rows; rNum++) {
             String testCase = excel.getCellData(sheetName, rNum, 0);
             if (testCase.equalsIgnoreCase(testName)) {
                 String runMode = excel.getCellData(sheetName, rNum, 1);

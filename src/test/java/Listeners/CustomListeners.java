@@ -27,6 +27,7 @@ public class CustomListeners implements ITestListener {
 
         if (!TestBase.isTestRunnable(className, excel)) {
             String message = "Skipping " + result.getName() + " as runmode is set to NO";
+            System.out.println(message+" For the test class "+ className);
             test.log(LogStatus.SKIP, message);
             throw new SkipException(message);
         }
