@@ -56,3 +56,4 @@ build/
 /src/test/resources/Logs/
 /test-output/
 /Screenshots/
+/src/test/resources/Properties/EmailCredentials.json
