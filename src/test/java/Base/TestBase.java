@@ -85,6 +85,10 @@ public class TestBase {
 
             boolean headless = Boolean.parseBoolean(config.getProperty("headless"));
 
+            if(System.getenv("browser") != null && !System.getenv("browser").isEmpty()) {
+                config.setProperty("browser", System.getenv("browser"));
+            }
+
             if (config.getProperty("browser").equals("chrome")) {
                 ChromeOptions options = new ChromeOptions();
                 if (headless) {
