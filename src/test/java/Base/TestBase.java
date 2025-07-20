@@ -2,6 +2,7 @@ package Base;
 
 import Utilities.ExcelReader;
 import Utilities.ExtentManager;
+import Utilities.MonitoringMail;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -34,6 +35,9 @@ import java.net.UnknownHostException;
 import java.time.Duration;
 import java.util.List;
 import java.util.Properties;
+
+import static Utilities.EmailConfigReader.*;
+import static Utilities.EmailConfigReader.getBody;
 
 public class TestBase {
 
@@ -152,6 +156,7 @@ public class TestBase {
             driver.quit();
         }
         logger.info("Driver closed");
+        MonitoringMail.sendMail(getMailServer(), getFrom(), getPassword(), getTo(), getSubject(), getBody(), new String[]{});
     }
 
     public boolean isElementPresent(By by) {

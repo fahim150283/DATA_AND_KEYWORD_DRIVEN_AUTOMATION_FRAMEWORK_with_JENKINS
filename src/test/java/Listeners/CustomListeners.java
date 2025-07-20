@@ -40,8 +40,6 @@ public class CustomListeners implements ITestListener {
         ITestListener.super.onFinish(context);
         rep.endTest(test);
         rep.flush();
-
-        MonitoringMail.sendMail(getMailServer(), getFrom(), getPassword(), getTo(), getSubject(), getBody(), new String[]{});
     }
 
     @Override
