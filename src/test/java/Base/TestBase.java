@@ -272,4 +272,5 @@ public class TestBase {
         String hostAddress = "http://" + InetAddress.getLocalHost().getHostAddress()+":8080/job/DATA_AND_KEYWORD_DRIVEN_AUTOMATION_FRAMEWORK_with_JENKINS/Extent_20Report/";
         return hostAddress;
     }
+
 }
