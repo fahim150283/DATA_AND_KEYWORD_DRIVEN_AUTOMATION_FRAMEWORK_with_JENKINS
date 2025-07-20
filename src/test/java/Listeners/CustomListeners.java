@@ -20,6 +20,13 @@ public class CustomListeners implements ITestListener {
     }
 
     @Override
+    public void onFinish(ITestContext context) {
+        ITestListener.super.onFinish(context);
+        rep.endTest(test);
+        rep.flush();
+    }
+
+    @Override
     public void onTestStart(ITestResult result) {
         ITestListener.super.onTestStart(result);
         String[] classNameparts = result.getTestClass().getName().split("\\.");
@@ -33,13 +40,6 @@ public class CustomListeners implements ITestListener {
             test.log(LogStatus.SKIP, message);
             throw new SkipException(message);
         }
-    }
-
-    @Override
-    public void onFinish(ITestContext context) {
-        ITestListener.super.onFinish(context);
-        rep.endTest(test);
-        rep.flush();
     }
 
     @Override
