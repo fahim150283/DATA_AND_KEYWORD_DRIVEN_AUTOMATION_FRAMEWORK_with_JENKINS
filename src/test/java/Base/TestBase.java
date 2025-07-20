@@ -29,6 +29,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.time.Duration;
 import java.util.List;
 import java.util.Properties;
@@ -258,5 +260,11 @@ public class TestBase {
             }
         }
      return false;
+    }
+
+
+    public static String getHostAddress() throws UnknownHostException {
+        String hostAddress = "http://" + InetAddress.getLocalHost().getHostAddress()+":8080/job/DATA_AND_KEYWORD_DRIVEN_AUTOMATION_FRAMEWORK_with_JENKINS/Extent_20Report/";
+        return hostAddress;
     }
 }

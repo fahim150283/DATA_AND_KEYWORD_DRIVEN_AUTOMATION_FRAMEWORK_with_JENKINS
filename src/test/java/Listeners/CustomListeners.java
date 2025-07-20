@@ -1,6 +1,7 @@
 package Listeners;
 
 import Base.TestBase;
+import Utilities.MonitoringMail;
 import Utilities.ScreenshotUtil;
 import com.relevantcodes.extentreports.LogStatus;
 import org.apache.logging.log4j.LogManager;
@@ -8,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.testng.*;
 
 import static Base.TestBase.*;
+import static Utilities.EmailConfigReader.*;
 
 public class CustomListeners implements ITestListener {
     public static Logger logger = LogManager.getLogger("org.example");
@@ -20,14 +22,14 @@ public class CustomListeners implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
         ITestListener.super.onTestStart(result);
-        String [] classNameparts = result.getTestClass().getName().split("\\.");
-        String className = classNameparts[classNameparts.length-1];
+        String[] classNameparts = result.getTestClass().getName().split("\\.");
+        String className = classNameparts[classNameparts.length - 1];
         System.out.println("Test Class Name: " + className);
         test = rep.startTest(result.getName().toUpperCase());
 
         if (!TestBase.isTestRunnable(className, excel)) {
             String message = "Skipping " + result.getName() + " as runmode is set to NO";
-            System.out.println(message+" For the test class "+ className);
+            System.out.println(message + " For the test class " + className);
             test.log(LogStatus.SKIP, message);
             throw new SkipException(message);
         }
@@ -38,6 +40,8 @@ public class CustomListeners implements ITestListener {
         ITestListener.super.onFinish(context);
         rep.endTest(test);
         rep.flush();
+
+        MonitoringMail.sendMail(getMailServer(), getFrom(), getPassword(), getTo(), getSubject(), getBody(), new String[]{});
     }
 
     @Override
