@@ -151,7 +151,7 @@ public class TestBase {
 
     @AfterSuite
     public void tearDown() throws InterruptedException {
-        MonitoringMail.sendMail(getMailServer(), getFrom(), getPassword(), getTo(), getSubject(), getBody(), new String[]{});
+//        MonitoringMail.sendMail(getMailServer(), getFrom(), getPassword(), getTo(), getSubject(), getBody(), new String[]{});
         //        Thread.sleep(15000);
         if (driver != null) {
             driver.quit();
